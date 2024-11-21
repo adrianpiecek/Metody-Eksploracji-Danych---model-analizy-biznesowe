@@ -25,10 +25,24 @@ users_first_dim, users_second_dim = read_data_users(users_path)
 
 finance_path = './Finanse_Pracownicy.txt'
 finance_first_dim, finance_second_dim = read_data_finanse_pracownicy(finance_path)
-
+'''
 print("UZYTKOWNICY\nkwartał i rok:", users_first_dim)
 print("\nliczba uzytkownikow:\n", users_second_dim)
 
 print("\nFINANSE I PRACOWNICY\nrok:", finance_first_dim)
 print("\nprzychod, zysk, zatrudnienie:\n", finance_second_dim)
+'''
+pd.DataFrame(users_second_dim, index=users_first_dim, columns=['Liczba użytkowników'])
+pd.DataFrame(finance_second_dim, index=finance_first_dim, columns=['Przychód', 'Zysk', 'Zatrudnienie'])
 
+users_chart = alt.Chart(pd.DataFrame(users_second_dim, index=users_first_dim, columns=['Liczba użytkowników']))
+finance_chart = alt.Chart(pd.DataFrame(finance_second_dim, index=finance_first_dim, columns=['Przychód', 'Zysk', 'Zatrudnienie']))
+
+users_chart.mark_line().encode(x=alt.X(users_first_dim, type='ordinal'), y='Liczba użytkowników')
+#prezentacja danych finansowych
+finance_chart.mark_line().encode(x=alt.X(finance_first_dim, type='ordinal'), y='Przychód')
+finance_chart.mark_line().encode(x=alt.X(finance_first_dim, type='ordinal'), y='Zysk')
+finance_chart.mark_line().encode(x=alt.X(finance_first_dim, type='ordinal'), y='Zatrudnienie')
+#wyświetlanie
+users_chart
+finance_chart
