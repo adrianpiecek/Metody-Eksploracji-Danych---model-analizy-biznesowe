@@ -10,8 +10,8 @@ def read_data_users(file_path):
     first_dimension = [lines[i].strip() for i in range(0, len(lines), 3)]   # rok i kwartal
     second_dimension = [int(lines[i].strip()) for i in range(1, len(lines), 3)] # liczba użytkowników
 
-    return pd.DataFrame(second_dimension, index=first_dimension, columns=['Liczba użytkowników'])
-    #return np.array(first_dimension), np.array(second_dimension)
+    #return pd.DataFrame(second_dimension, index=first_dimension, columns=['Liczba użytkowników'])
+    return np.array(first_dimension), np.array(second_dimension)
     
 
 def read_data_finanse_pracownicy(file_path):
@@ -20,8 +20,8 @@ def read_data_finanse_pracownicy(file_path):
     # pierwsza liczba każdego wiersza to pierwszy wymiar, reszta to drugi wymiar
     first_dimension = [lines[i].strip().split()[0] for i in range(0, len(lines))] # rok
     second_dimension = [list(map(float, lines[i].strip().split()[1:])) for i in range(0, len(lines))] # przychod zysk zatrudnienie
-    #return np.array(first_dimension), np.array(second_dimension)
-    return pd.DataFrame(second_dimension, index=first_dimension, columns=['Przychód', 'Zysk', 'Zatrudnienie'])
+    return np.array(first_dimension), np.array(second_dimension)
+    #return pd.DataFrame(second_dimension, index=first_dimension, columns=['Przychód', 'Zysk', 'Zatrudnienie'])
 
 # Example usage
 users_path = './Uzytkownicy.txt'
